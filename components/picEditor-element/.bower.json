@@ -1,0 +1,28 @@
+{
+  "name": "picEditor-element",
+  "authors": [
+    "Valerio Gheri <valerio.gheri@qxlricardo.fr>"
+  ],
+  "description": "Element providing a basic image editor in the browser",
+  "keywords": "image editor, polymer, web-components",
+  "main": "picEditor-element.html",
+  "license": "MIT",
+  "homepage": "https://github.com/vgheri/picEditor-element/",
+  "ignore": [
+    "**/.*"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#>=0.4.0 <1.0.0",
+    "polymer-test-tools": "Polymer/polymer-test-tools#>=0.4.0 <1.0.0"
+  },
+  "_release": "7740bef5f6",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "7740bef5f647ce57ac91dccdc5a09e82b5c2ff6d"
+  },
+  "_source": "git://github.com/vgheri/picEditor-element.git",
+  "_target": "master",
+  "_originalSource": "vgheri/picEditor-element",
+  "_direct": true
+}

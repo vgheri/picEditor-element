@@ -1,0 +1,7 @@
+{
+  "name": "picEditor-element#gh-pages",
+  "private": true,
+  "dependencies": {
+    "picEditor-element": "vgheri/picEditor-element#master"
+  }
+}
