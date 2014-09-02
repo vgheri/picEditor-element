@@ -8,7 +8,7 @@
   "keywords": "image editor, polymer, web-components",
   "main": "picEditor-element.html",
   "license": "MIT",
-  "homepage": "https://github.com/vgheri/ricardoPicEditor-element/",
+  "homepage": "https://github.com/vgheri/picEditor-element/",
   "ignore": [
     "**/.*"
   ],
