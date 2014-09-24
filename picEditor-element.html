@@ -24,12 +24,17 @@ Element providing solution to no problem in particular.
 <polymer-element name="picEditor-element" attributes="notitle author">
 
   <template>
-
     <link rel="stylesheet" href="picEditor-element.css" />
-
-    <h1>Hello from picEditor-element</h1>
-    <content></content>
-
+    <div id="element-container">
+      <div id="image-container">
+        <content select="#img"></content>
+        <canvas id="canvas" style="border:1px solid #d3d3d3;"></canvas>
+      </div>
+      <div id="controls-container">
+        <button type="button" id="crop-btn" on-click="{{crop}}">Crop</button>
+        <button type="button" id="rotate-btn" on-click="{{rotate}}">Rotate</button>
+      </div>
+    </div>
   </template>
 
   <script>
@@ -44,19 +49,21 @@ Element providing solution to no problem in particular.
        */
       author: 'Valerio Gheri',
 
-      /**
-       * `fancy` is a property that does something fancy.
-       *
-       * @property fancy
-       * @type bool
-       * @default false
-       */
-      fancy: false,
-
       ready: function() {
         // Ready is a lifecycle callback.
         // You can do setup work in here.
         // More info: http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
+
+      },
+
+      domReady: function() {
+        var image = document.getElementById('img');
+        console.log('domReady Image width ' + image.clientWidth);
+        this.$.canvas.width = image.clientWidth + 20;
+        this.$.canvas.height = image.clientHeight + 20;
+        image.style.display = 'none';
+        var ctx= this.$.canvas.getContext('2d');
+        ctx.drawImage(image,10,10);
       },
 
       /**
@@ -69,6 +76,15 @@ Element providing solution to no problem in particular.
       sayHello: function(greeting) {
         var response = greeting || 'Hello World!';
         return 'seed-element says, ' + response;
+      },
+
+      /**
+       * The `crop` method will allow the user to crop the selected image.
+       *
+       * @method crop
+       */
+      crop: function() {
+
       },
 
       /**
