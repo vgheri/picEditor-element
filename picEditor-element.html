@@ -48,6 +48,11 @@ Element providing solution to no problem in particular.
        * @default 'Valerio Gheri'
        */
       author: 'Valerio Gheri',
+      currentRotationAngle: 0,
+      ctx: null,
+      image: null,
+      imageWidth: 0,
+      imageHeight: 0,
 
       ready: function() {
         // Ready is a lifecycle callback.
@@ -57,13 +62,14 @@ Element providing solution to no problem in particular.
       },
 
       domReady: function() {
-        var image = document.getElementById('img');
-        console.log('domReady Image width ' + image.clientWidth);
-        this.$.canvas.width = image.clientWidth + 20;
-        this.$.canvas.height = image.clientHeight + 20;
-        image.style.display = 'none';
-        var ctx= this.$.canvas.getContext('2d');
-        ctx.drawImage(image,10,10);
+        this.image = document.getElementById('img');
+        this.$.canvas.width = 1000; //this.image.clientWidth + 20;
+        this.$.canvas.height = 700; //this.image.clientHeight + 20;
+        this.imageWidth = this.image.clientWidth;
+        this.imageHeight = this.image.clientHeight;
+        this.ctx = this.$.canvas.getContext('2d');
+        this.displayImageInCanvas(0, 0);
+        this.image.style.display = 'none';
       },
 
       /**
@@ -79,12 +85,66 @@ Element providing solution to no problem in particular.
       },
 
       /**
+       * The `displayImageInCanvas` method will return a greeting.
+       *
+       * @method displayImageInCanvas
+       * @param {Object} image element to draw
+       * @param {int} the x coordinate where to place the image on canvas
+       * @param {int} the y coordinate where to place the image on canvas
+       */
+      displayImageInCanvas: function(x, y) {
+        this.ctx.drawImage(this.image, x, y);
+      },
+
+      /**
        * The `crop` method will allow the user to crop the selected image.
        *
        * @method crop
        */
       crop: function() {
 
+      },
+
+      /**
+       * The `rotate` method will allow the user to clockwise
+       * rotate the selected image.
+       *
+       * @method crop
+       */
+      rotate: function() {
+        //this.ctx.clearRect(0, 0, this.$.canvas.width, this.$.canvas.height);
+        var x, y = 0;
+        this.currentRotationAngle += 90;
+        if (this.currentRotationAngle >= 360) {
+          this.currentRotationAngle = 0;
+        }
+        switch(this.currentRotationAngle) {
+          case 90:
+            this.ctx.clearRect(0, 0, this.$.canvas.width, this.$.canvas.height);
+            x = 0;
+            y = 0 - this.imageHeight;
+            break;
+          case 180:
+            this.ctx.clearRect(0, 0,
+              this.$.canvas.width, 0 - this.$.canvas.height);
+            x = 0 - this.imageWidth;
+            y = 0 - this.imageHeight;
+            break;
+          case 270:
+            this.ctx.clearRect(0, 0,
+              0 - this.$.canvas.width, 0 - this.$.canvas.height);
+            x = 0 - this.imageWidth;
+            y = 0;
+            break;
+          default:
+            this.ctx.clearRect(0, 0,
+              0 - this.$.canvas.width, this.$.canvas.height);
+            x = 0;
+            y = 0;
+            break;
+        }
+        this.ctx.rotate(90*Math.PI/180);
+        this.displayImageInCanvas(x, y);
       },
 
       /**
